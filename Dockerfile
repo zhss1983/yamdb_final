@@ -2,7 +2,12 @@ FROM python:3.9-slim
 
 WORKDIR /code
 
-COPY requirements.txt /code
+COPY requirements.txt /code &&\
+ sudo apt install snapd &&\
+ sudo snap install core &&\
+ sudo snap refresh core &&\
+ sudo snap install --classic certbot &&\
+ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 RUN pip install -r /code/requirements.txt
 
