@@ -16,8 +16,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - static_value:/code/static/
-      - media_value:/code/media/
+      - static_value:/static/
+      - media_value:/media/
     depends_on:
       - db
     env_file:
