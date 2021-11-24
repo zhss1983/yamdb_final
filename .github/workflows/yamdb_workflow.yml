@@ -78,8 +78,8 @@ jobs:
             echo SENTRY_DSN=${{ secrets.SENTRY_DSN }} >> .env_web
             echo EMAIL_YAMDB=${{ secrets.EMAIL_YAMDB }} >> .env_web
 
-            touch .env_mail
-            echo EMAIL_HOST=${{ secrets.EMAIL_HOST }} >> .env_mail
+            # touch .env_mail
+            echo EMAIL_HOST=${{ secrets.EMAIL_HOST }} > .env_mail
             echo EMAIL_PORT=${{ secrets.EMAIL_PORT }} >> .env_mail
             echo EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} >> .env_mail
             echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> .env_mail
