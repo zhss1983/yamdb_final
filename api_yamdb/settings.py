@@ -7,7 +7,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = False
 
@@ -84,8 +84,8 @@ else:
         'default': {
             'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
             'NAME': os.getenv('DB_NAME', 'postgres'),
-            'USER': os.getenv('POSTGRES_USER', 'yamdb_user'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'yamdb_16147'),
+            'USER': os.getenv('POSTGRES_USER'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
             'HOST': os.getenv('DB_HOST', 'db'),
             'PORT': os.getenv('DB_PORT', 5432)
         }
@@ -144,7 +144,7 @@ else:
     EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.mail.ru')
     EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 2525))
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'zhss.83@mail.ru')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '433hFqxjHdSD4n6dzyR7')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
     EMAIL_USE_SSL = bool(os.environ.get('EMAIL_USE_SSL'))
     SERVER_EMAIL = os.environ.get('EMAIL_HOST_USER', 'zhss.83@mail.ru')
