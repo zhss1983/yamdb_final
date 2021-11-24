@@ -56,7 +56,7 @@ jobs:
     - name: Copy files to remote
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: yamdb_final
+        local: yamdb_final/
         remote: code
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
@@ -85,4 +85,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выпо
+        message: ${{ github.workflow }} успешно выполнен
