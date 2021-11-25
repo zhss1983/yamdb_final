@@ -9,7 +9,6 @@ services:
       - .env_db
 
   web:
-    #build: .
     image: zhss1983/api_yamdb:latest
     restart: always
     command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
