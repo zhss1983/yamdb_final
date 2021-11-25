@@ -11,7 +11,6 @@ services:
   web:
     image: zhss1983/api_yamdb:latest
     restart: always
-    command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
     ports:
       - "8000:8000"
     volumes:
@@ -23,6 +22,19 @@ services:
       - .env_db
       - .env_mail
       - .env_web
+
+  nginx-ssl-proxy:
+    image: danieldent/nginx-ssl-proxy
+    restart: always
+    environment:
+      UPSTREAM: 127.0.0.1:8000
+      SERVERNAME: zhss.tk
+      EXTRANAMES: www.zhss.tk
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt
 
   nginx:
     image: nginx:1.21.4-alpine
