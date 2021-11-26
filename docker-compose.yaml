@@ -9,7 +9,7 @@ services:
       - .env_db
 
   web:
-    image: zhss1983/api_yamdb:latest
+    image: zhss1983/api_yamdb:v-3
     restart: always
     ports:
       - "8000:8000"
@@ -27,9 +27,9 @@ services:
     image: danieldent/nginx-ssl-proxy
     restart: always
     environment:
-      UPSTREAM: 127.0.0.1:80
-      SERVERNAME: zhss.tk
-      EXTRANAMES: www.zhss.tk
+      UPSTREAM: 127.0.0.1
+      SERVERNAME: www.zhss.tk
+      EXTRANAMES: zhss.tk
     ports:
       - "80:80"
       - "443:443"
