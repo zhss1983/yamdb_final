@@ -146,3 +146,6 @@ dmypy.json
 .history/
 
 .mypy_cache
+
+# my adds
+init-letsencrypt.sh

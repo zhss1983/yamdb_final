@@ -47,7 +47,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb
 
   deploy:
     runs-on: ubuntu-latest
@@ -62,8 +62,8 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             sudo docker-compose stop
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb
             sudo docker-compose rm web
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb
 
             touch ~/.env_db
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} > ~/.env_db
@@ -85,9 +85,9 @@ jobs:
             echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> ~/.env_mail
             echo EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} >> ~/.env_mail
 
-            touch ~/.env_nginx
-            echo UPSTREAM=${{ secrets.UPSTREAM }} > ~/.env_nginx
-            echo SERVERNAME=${{ secrets.SERVERNAME }} >> ~/.env_nginx
+            # touch ~/.env_nginx
+            # echo UPSTREAM=${{ secrets.UPSTREAM }} > ~/.env_nginx
+            # echo SERVERNAME=${{ secrets.SERVERNAME }} >> ~/.env_nginx
 
             sudo docker-compose up -d
 
