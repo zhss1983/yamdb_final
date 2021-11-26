@@ -149,3 +149,4 @@ dmypy.json
 
 # my adds
 init-letsencrypt.sh
+first_run.sh
