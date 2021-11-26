@@ -27,7 +27,7 @@ services:
     image: danieldent/nginx-ssl-proxy
     restart: always
     environment:
-      UPSTREAM: 127.0.0.1
+      UPSTREAM: 127.0.0.1:80
       SERVERNAME: zhss.tk
       EXTRANAMES: www.zhss.tk
     ports:

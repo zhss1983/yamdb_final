@@ -85,6 +85,10 @@ jobs:
             echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> ~/.env_mail
             echo EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} >> ~/.env_mail
 
+            touch ~/.env_nginx
+            echo UPSTREAM=${{ secrets.UPSTREAM }} > ~/.env_nginx
+            echo SERVERNAME=${{ secrets.SERVERNAME }} >> ~/.env_nginx
+
             sudo docker-compose up -d
 
   send_message:
