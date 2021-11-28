@@ -1,6 +1,10 @@
 name: API YaMDB workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - main
 
 jobs:
   tests:
