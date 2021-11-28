@@ -11,8 +11,6 @@ services:
   web:
     image: zhss1983/api_yamdb
     restart: always
-    ports:
-      - "8000:8000"
     volumes:
       - ./data/static:/code/static
       - ./data/media:/code/media
