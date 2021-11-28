@@ -1,5 +1,6 @@
 #!/bin/bash
 
-sudo docker exec sergey_web_1 python manage.py collectstatic
-sudo docker exec sergey_web_1 python manage.py migrate
-sudo docker exec sergey_web_1 python manage.py loaddata fixtures.json
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py createsuperuser
+sudo docker-compose exec web python manage.py collectstatic
+sudo docker-compose exec web python manage.py loaddata fixtures.json

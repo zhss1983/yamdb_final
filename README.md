@@ -1,4 +1,4 @@
-# Документация к API YaMDb (v2)
+# Документация к API YaMDb
 
 Текущий статус:
 
@@ -8,13 +8,7 @@
 
 ### Загрузите API YaMDB с git
 
-git clone https://github.com/zhss1983/infra_sp2
-
-При необходимости вы всегда можете загрузить актуальный образ с Docker Hub.
-
-Последняя версия на 17.11.2021: docker pull zhss1983/api_yamdb:v2
-
-Для его использовани просто внесите в файл docker-compose.yaml исправления в секции web. Замените строку "build: ." на "image: zhss1983/api_yamdb:v2".
+Скачать с https://github.com/zhss1983/yamdb_final файл docker-compose.yamdb
 
 ### Создайте 3 файла с переменными окружения:
    
@@ -55,11 +49,33 @@ SENTRY_DSN - Это ссылка предоставляемая https://sentry.i
 
 Убедитесь что файл конфигурации nginx присутствует в папке ./nginx/
 
-Имя default.conf.
+В файле default.conf есть три включаемых конфигурации (в любой момент должна быть подключена лишь одна из трёх):
 
-### Собираем всё образы вместе
+ - default_mini.conf - позволяет запустить минимальный функционал. Доступ к сайту будет обеспечиваться по протоколу http
+ - default_first.conf - данная конфигурация необходима для получения SSL сертификата. Для его получения необходимо выполнить от имени администратора скрипт init-letsencrypt.sh. В самом скрипте необходимо предварительно задать следующие параметры:
+   - domains=(zhss.tk www.zhss.tk) - Домен
+   - email="zhss.83@mail.ru" - Почта
+ - default_evryday.conf - после запуска init-letsencrypt.sh необходимо переключить конфигурацию на эту и перезапустить nginx контейнер.
+
+### Работа с образами
+
+Все операции выполнять от имени администратора или выполнить следующие команды:
+
+ - sudo groupadd docker
+ - sudo usermod -aG docker <ИМЯ_ПОЛЬЗОВАТЕЛЯ>
+ - Перезапуск окружения (выход из сессии и вход заново).
+
+#### Собрать все образы вместе.
 
 docker-compose up -d
+
+#### Пересобрать все образы вместе
+
+docker-compose up -d --build
+
+#### Перезапустить все образы
+
+docker-compose restart
 
 ### Выполнить подготовку базы данных
 
@@ -72,6 +88,8 @@ docker-compose exec web python manage.py collectstatic
 Восстановить данные по умолчанию:
 
 docker-compose exec web python manage.py loaddata fixtures.json
+
+Все эти команды уже прописаны в first_run.sh, достаточно его запустить.
 
 ## Описание проекта:
 
@@ -144,5 +162,4 @@ POST: [/api/v1/auth/token/](http://127.0.0.1:8000/api/v1/auth/token/)
 - Комментарии:
   [/api/v1/titles/{title_id}/reviews/{review_id}/comments/](http://127.0.0.1:8000/api/v1/titles/1/reviews/1/comments/)
  
-По всем вопросам обращайтесь к администраторам по электронной почте
-[ask@api_yamdb.ru](mailto:ask@api_yamdb.ru)
+По всем вопросам обращайтесь к администраторам по [электронной почте](mailto:zhss.83@mail.ru)
