@@ -20,7 +20,9 @@
 жанр из списка предустановленных (например, «Сказка», «Рок» или «Артхаус»).
 Новые жанры также может создавать только администратор.
 
-Стек применённых технологий: Python 3.8.5, Django 3.0.5, DjangoRestFramework 3.12.4, Simple JWT, PostgreSQL 12.4, Gunicorn 20.0.4, Nginx 1.21.4, Docker.
+### Стек применённых технологий:
+
+Python 3.8.5, Django 3.0.5, DjangoRestFramework 3.12.4, Simple JWT, PostgreSQL 12.4, Gunicorn 20.0.4, Nginx 1.21.4, Docker.
 
 ## Как запустить проект:
 
