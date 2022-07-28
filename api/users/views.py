@@ -5,12 +5,16 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 from .permissions import IsAdmin
-from .serializers import (UserRegistrationSerializer, UserSerializer,
-                          YAMDBTokenObtainPairSerializer)
+from .serializers import (
+    UserRegistrationSerializer,
+    UserSerializer,
+    YAMDBTokenObtainPairSerializer,
+)
 
 
 class UserRegistrationViewSet(generics.CreateAPIView):
     """Вьюсет для регистрации новых пользователей."""
+
     serializer_class = UserRegistrationSerializer
     permission_classes = (permissions.AllowAny,)
 
@@ -24,8 +28,9 @@ class YAMBDTokenObtainPairView(TokenObtainPairView):
     """Вьюсет для получения токена. Наследуется от
     вьюсета из Simple JWT.
     """
+
     serializer_class = YAMDBTokenObtainPairSerializer
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -33,22 +38,23 @@ class UserViewSet(viewsets.ModelViewSet):
     администратора, и для CRU только своих учетных
     записей прочими пользователем.
     """
+
     serializer_class = UserSerializer
     permission_classes = (IsAdmin,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('=username',)
-    lookup_field = 'username'
+    search_fields = ("=username",)
+    lookup_field = "username"
     queryset = User.objects.all()
 
-    @action(detail=False,
-            permission_classes=[permissions.IsAuthenticated],
-            methods=['PATCH', 'GET'])
+    @action(
+        detail=False,
+        permission_classes=[permissions.IsAuthenticated],
+        methods=["PATCH", "GET"],
+    )
     def me(self, request, *args, **kwargs):
-        serializer = UserSerializer(
-            request.user, data=request.data, partial=True)
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
         if serializer.is_valid():
-            if (self.request.user.not_admin
-                    and 'role' in serializer.validated_data):
-                serializer.validated_data.pop('role')
+            if self.request.user.not_admin and "role" in serializer.validated_data:
+                serializer.validated_data.pop("role")
             serializer.save()
         return Response(serializer.data)

@@ -10,41 +10,61 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('reviews', '0001_initial'),
+        ("reviews", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='review',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="review",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="reviews",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='review',
-            name='title',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='reviews', to='reviews.Title', verbose_name='Произведение'),
+            model_name="review",
+            name="title",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="reviews",
+                to="reviews.Title",
+                verbose_name="Произведение",
+            ),
         ),
         migrations.AddField(
-            model_name='comment',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="comment",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="comments",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='comment',
-            name='review',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='reviews.Review', verbose_name='Отзыв'),
+            model_name="comment",
+            name="review",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="comments",
+                to="reviews.Review",
+                verbose_name="Отзыв",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='review',
-            constraint=models.UniqueConstraint(fields=('title', 'author'), name='unique_title_author'),
+            model_name="review",
+            constraint=models.UniqueConstraint(fields=("title", "author"), name="unique_title_author"),
         ),
         migrations.AddConstraint(
-            model_name='review',
-            constraint=models.CheckConstraint(check=models.Q(score__gte=1), name='score_gte_1'),
+            model_name="review",
+            constraint=models.CheckConstraint(check=models.Q(score__gte=1), name="score_gte_1"),
         ),
         migrations.AddConstraint(
-            model_name='review',
-            constraint=models.CheckConstraint(check=models.Q(score__lte=10), name='score_lte_10'),
+            model_name="review",
+            constraint=models.CheckConstraint(check=models.Q(score__lte=10), name="score_lte_10"),
         ),
     ]

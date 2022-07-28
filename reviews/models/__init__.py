@@ -7,10 +7,10 @@ from .review import Review
 from .title import Title
 
 __all__ = [
-    'Category',
-    'Comment',
-    'Genre',
-    'Review',
-    'Title',
-    'User',
+    "Category",
+    "Comment",
+    "Genre",
+    "Review",
+    "Title",
+    "User",
 ]

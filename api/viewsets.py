@@ -13,13 +13,12 @@ class GetTitleBaseViewSet(ModelViewSet):
     pagination_class = PageNumberPagination
 
     def get_title(self):
-        title_id = self.kwargs.get('title_id')
+        title_id = self.kwargs.get("title_id")
         return get_object_or_404(Title, pk=title_id)
 
 
 class GetReviewBaseViewSet(GetTitleBaseViewSet):
-
     def get_review(self):
         title = self.get_title()
-        review_id = self.kwargs.get('review_id')
+        review_id = self.kwargs.get("review_id")
         return get_object_or_404(title.reviews, pk=review_id)

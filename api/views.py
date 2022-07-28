@@ -9,9 +9,14 @@ from reviews.models import Category, Genre, Title
 from .filters import TitleFilter
 from .mixins import CategoryGenreViewSet
 from .permissions import AdminOrReadOnly
-from .serializers import (CategorySerializer, CommentSerializer,
-                          GenreSerializer, ReviewSerializer,
-                          TitleSerializerEdit, TitleSerializerSafe)
+from .serializers import (
+    CategorySerializer,
+    CommentSerializer,
+    GenreSerializer,
+    ReviewSerializer,
+    TitleSerializerEdit,
+    TitleSerializerSafe,
+)
 from .viewsets import GetReviewBaseViewSet, GetTitleBaseViewSet
 
 
@@ -38,14 +43,14 @@ class CommentViewSet(GetReviewBaseViewSet):
 
 
 class TitleViewSet(ModelViewSet):
-    queryset = Title.objects.annotate(rating=Avg('reviews__score'))
+    queryset = Title.objects.annotate(rating=Avg("reviews__score"))
     filterset_class = TitleFilter
     permission_classes = (AdminOrReadOnly,)
     pagination_class = LimitOffsetPagination
     filter_backends = [DjangoFilterBackend]
 
     def get_serializer_class(self):
-        if self.action in ['post', 'create', 'partial_update']:
+        if self.action in ["post", "create", "partial_update"]:
             return TitleSerializerEdit
         return TitleSerializerSafe
 

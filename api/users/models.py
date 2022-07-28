@@ -8,14 +8,9 @@ from .managers import CustomUserManager
 class User(AbstractUser):
     """Кастомная модель пользователя с доплнительными полями 'role' и 'bio'."""
 
-    role = models.CharField(
-        verbose_name='Права',
-        max_length=9,
-        choices=ACCESS_LEVEL,
-        default=USER
-    )
+    role = models.CharField(verbose_name="Права", max_length=9, choices=ACCESS_LEVEL, default=USER)
     bio = models.TextField(
-        verbose_name='Биография',
+        verbose_name="Биография",
         blank=True,
     )
     email = models.EmailField(unique=True)
@@ -23,13 +18,13 @@ class User(AbstractUser):
     # Необходимо для того, чтобы при создании
     # пользователя через консоль, запрашивался
     # email
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ["email"]
 
     objects = CustomUserManager()
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
 
     @property
     def not_admin(self):
@@ -43,17 +38,16 @@ class Code(models.Model):
     """Модель для хранения confirmation code
     пользователя.
     """
+
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE,
-        related_name='code',
-        verbose_name='Пользователь',
-        primary_key=True
+        User,
+        on_delete=models.CASCADE,
+        related_name="code",
+        verbose_name="Пользователь",
+        primary_key=True,
     )
-    code = models.CharField(
-        max_length=36,
-        verbose_name='confirmation_code'
-    )
+    code = models.CharField(max_length=36, verbose_name="confirmation_code")
 
     class Meta:
-        verbose_name = 'Код подтверждения'
-        verbose_name_plural = 'Коды подтверждения'
+        verbose_name = "Код подтверждения"
+        verbose_name_plural = "Коды подтверждения"
