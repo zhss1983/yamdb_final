@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rm -f /app/pytest.ini
 rm -rf /app/tests
 

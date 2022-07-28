@@ -53,43 +53,43 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
-            sudo docker-compose stop
-            sudo docker-compose rm web
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb
-
-            touch ~/.env_db
-            echo DB_ENGINE=${{ secrets.DB_ENGINE }} > ~/.env_db
-            echo DB_NAME=${{ secrets.DB_NAME }} >> ~/.env_db
-            echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> ~/.env_db
-            echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> ~/.env_db
-            echo DB_HOST=${{ secrets.DB_HOST }} >> ~/.env_db
-            echo DB_PORT=${{ secrets.DB_PORT }} >> ~/.env_db
-
-            touch ~/.env_web
-            echo SECRET_KEY=${{ secrets.SECRET_KEY }} > ~/.env_web
-            echo SENTRY_DSN=${{ secrets.SENTRY_DSN }} >> ~/.env_web
-            echo EMAIL_YAMDB=${{ secrets.EMAIL_YAMDB }} >> ~/.env_web
-
-            touch ~/.env_mail
-            echo EMAIL_HOST=${{ secrets.EMAIL_HOST }} > ~/.env_mail
-            echo EMAIL_PORT=${{ secrets.EMAIL_PORT }} >> ~/.env_mail
-            echo EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} >> ~/.env_mail
-            echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> ~/.env_mail
-            echo EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} >> ~/.env_mail
-
-            sudo docker-compose up -d
+#   deploy:
+#     runs-on: ubuntu-latest
+#   needs: build
+#   steps:
+#     - name: executing remote ssh commands to deploy
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USER }}
+#         key: ${{ secrets.SSH_KEY }}
+#         passphrase: ${{ secrets.SSH_PASSPHRASE }}
+#         script: |
+#           sudo docker-compose stop
+#           sudo docker-compose rm web
+#           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb
+#
+#           touch ~/.env_db
+#           echo DB_ENGINE=${{ secrets.DB_ENGINE }} > ~/.env_db
+#           echo DB_NAME=${{ secrets.DB_NAME }} >> ~/.env_db
+#           echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> ~/.env_db
+#           echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> ~/.env_db
+#           echo DB_HOST=${{ secrets.DB_HOST }} >> ~/.env_db
+#           echo DB_PORT=${{ secrets.DB_PORT }} >> ~/.env_db
+#
+#           touch ~/.env_web
+#           echo SECRET_KEY=${{ secrets.SECRET_KEY }} > ~/.env_web
+#           echo SENTRY_DSN=${{ secrets.SENTRY_DSN }} >> ~/.env_web
+#           echo EMAIL_YAMDB=${{ secrets.EMAIL_YAMDB }} >> ~/.env_web
+#
+#           touch ~/.env_mail
+#           echo EMAIL_HOST=${{ secrets.EMAIL_HOST }} > ~/.env_mail
+#           echo EMAIL_PORT=${{ secrets.EMAIL_PORT }} >> ~/.env_mail
+#           echo EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} >> ~/.env_mail
+#           echo EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} >> ~/.env_mail
+#           echo EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }} >> ~/.env_mail
+#
+#           sudo docker-compose up -d
 
   send_message:
     runs-on: ubuntu-latest

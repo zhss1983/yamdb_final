@@ -1,8 +1,18 @@
+![example workflow](https://github.com/zhss1983/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+
 # Документация к API YaMDb
 
-Текущий статус:
+## Стек технологий:
 
-![example workflow](https://github.com/zhss1983/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+**[Python 3](https://www.python.org/downloads/), 
+ [Django 3](https://docs.djangoproject.com/en/3.0/),
+ [DjangoRestFramework](https://www.django-rest-framework.org),
+ [PostgreSQL](https://www.postgresql.org/docs/),
+ [Docker](https://docs.docker.com/),
+ [Docker Compose](https://docs.docker.com/compose/),
+ [Gunicorn](https://docs.gunicorn.org/en/stable/) 20.0,
+ [Nginx](https://docs.nginx.com/) 1.21 ([Ru](https://nginx.org/ru/docs/)),
+ [GitHub Workflows](https://docs.github.com/en/rest/actions/workflows).**
 
 ## Описание проекта:
 
@@ -28,7 +38,7 @@ Python 3.8.5, Django 3.0.5, DjangoRestFramework 3.12.4, Simple JWT, PostgreSQL 1
 
 ### Загрузите API YaMDB с git
 
-Скачать с https://github.com/zhss1983/yamdb_final файл docker-compose.yamdb
+[Скачать](https://github.com/zhss1983/yamdb_final/docker-compose.yaml) файл docker-compose.yaml.
 
 ### Создайте 3 файла с переменными окружения:
    
